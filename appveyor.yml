@@ -40,8 +40,8 @@ environment:
         SCHANNEL: ON
         ENABLE_UNICODE: OFF
         HTTP_ONLY: OFF
-        TESTING: OFF
         SHARED: ON
+        TESTING: OFF
         DISABLED_TESTS: ""
       - job_name: "CMake, VS2022, Release x64, OpenSSL, WebSockets, Unity"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2022"
@@ -53,8 +53,8 @@ environment:
         SCHANNEL: OFF
         ENABLE_UNICODE: OFF
         HTTP_ONLY: OFF
-        TESTING: OFF
         SHARED: ON
+        TESTING: OFF
         DISABLED_TESTS: ""
         WEBSOCKETS: ON
         UNITY: "ON"
@@ -68,8 +68,8 @@ environment:
         SCHANNEL: ON
         ENABLE_UNICODE: OFF
         HTTP_ONLY: OFF
-        TESTING: OFF
         SHARED: OFF
+        TESTING: OFF
         DISABLED_TESTS: ""
       # generated CMake-based Visual Studio Debug builds
       - job_name: "CMake, VS2010, Debug x64, no SSL, Static"
@@ -81,8 +81,8 @@ environment:
         SCHANNEL: OFF
         ENABLE_UNICODE: OFF
         HTTP_ONLY: OFF
-        TESTING: ON
         SHARED: OFF
+        TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
         ADD_PATH: "C:\\msys64\\usr\\bin"
       - job_name: "CMake, VS2022, Debug x64, Schannel, Static, Unicode"
@@ -95,8 +95,8 @@ environment:
         SCHANNEL: ON
         ENABLE_UNICODE: ON
         HTTP_ONLY: OFF
-        TESTING: ON
         SHARED: OFF
+        TESTING: ON
         DISABLED_TESTS: "~571 !1139 !1501 ~1056"
         ADD_PATH: "C:\\msys64\\usr\\bin"
       - job_name: "CMake, VS2022, Debug x64, no SSL, Static"
@@ -109,8 +109,8 @@ environment:
         SCHANNEL: OFF
         ENABLE_UNICODE: OFF
         HTTP_ONLY: OFF
-        TESTING: ON
         SHARED: OFF
+        TESTING: ON
         DISABLED_TESTS: "~571 !1139 !1501 ~1056"
         ADD_PATH: "C:\\msys64\\usr\\bin"
       - job_name: "CMake, VS2022, Debug x64, no SSL, Static, HTTP only"
@@ -123,8 +123,8 @@ environment:
         SCHANNEL: OFF
         ENABLE_UNICODE: OFF
         HTTP_ONLY: ON
-        TESTING: ON
         SHARED: OFF
+        TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
         ADD_PATH: "C:\\msys64\\usr\\bin"
       # generated CMake-based MSYS Makefiles builds (mingw cross-compiling)
@@ -137,9 +137,10 @@ environment:
         SCHANNEL: ON
         ENABLE_UNICODE: ON
         HTTP_ONLY: OFF
-        TESTING: ON
         SHARED: OFF
+        TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
+        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -152,9 +153,10 @@ environment:
         SCHANNEL: ON
         ENABLE_UNICODE: ON
         HTTP_ONLY: OFF
-        TESTING: ON
         SHARED: OFF
+        TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
+        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\mingw-w64\\x86_64-7.2.0-posix-seh-rt_v5-rev1\\mingw64\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -167,8 +169,8 @@ environment:
         SCHANNEL: ON
         ENABLE_UNICODE: OFF
         HTTP_ONLY: OFF
-        TESTING: OFF
         SHARED: OFF
+        TESTING: OFF
         ADD_PATH: "C:\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -182,9 +184,10 @@ environment:
         SCHANNEL: ON
         ENABLE_UNICODE: OFF
         HTTP_ONLY: OFF
-        TESTING: ON
         SHARED: OFF
+        TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
+        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\mingw-w64\\i686-6.3.0-posix-dwarf-rt_v5-rev1\\mingw32\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -197,9 +200,10 @@ environment:
         SCHANNEL: OFF
         ENABLE_UNICODE: OFF
         HTTP_ONLY: OFF
-        TESTING: ON
         SHARED: OFF
+        TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
+        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\MinGW\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -209,70 +213,71 @@ environment:
         BUILD_SYSTEM: winbuild_vs2015
         DEBUG: yes
         PATHPART: debug
-        TESTING: OFF
         ENABLE_UNICODE: no
+        TESTING: OFF
       - job_name: "winbuild, VS2015, Release"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
         BUILD_SYSTEM: winbuild_vs2015
         DEBUG: no
         PATHPART: release
-        TESTING: OFF
         ENABLE_UNICODE: no
+        TESTING: OFF
       - job_name: "winbuild, VS2017, Debug"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
         BUILD_SYSTEM: winbuild_vs2017
         DEBUG: yes
         PATHPART: debug
-        TESTING: OFF
         ENABLE_UNICODE: no
+        TESTING: OFF
       - job_name: "winbuild, VS2017, Release"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
         BUILD_SYSTEM: winbuild_vs2017
         DEBUG: no
         PATHPART: release
-        TESTING: OFF
         ENABLE_UNICODE: no
+        TESTING: OFF
       - job_name: "winbuild, VS2015, Debug, Unicode"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
         BUILD_SYSTEM: winbuild_vs2015
         DEBUG: yes
         PATHPART: debug
-        TESTING: OFF
         ENABLE_UNICODE: yes
+        TESTING: OFF
       - job_name: "winbuild, VS2015, Release, Unicode"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2015"
         BUILD_SYSTEM: winbuild_vs2015
         DEBUG: no
         PATHPART: release
-        TESTING: OFF
         ENABLE_UNICODE: yes
+        TESTING: OFF
       - job_name: "winbuild, VS2017, Debug, Unicode"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
         BUILD_SYSTEM: winbuild_vs2017
         DEBUG: yes
         PATHPART: debug
-        TESTING: OFF
         ENABLE_UNICODE: yes
+        TESTING: OFF
       - job_name: "winbuild, VS2017, Release, Unicode"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
         BUILD_SYSTEM: winbuild_vs2017
         DEBUG: no
         PATHPART: release
-        TESTING: OFF
         ENABLE_UNICODE: yes
+        TESTING: OFF
       # generated VisualStudioSolution-based builds
       - job_name: "VisualStudioSolution, VS2017, Debug"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
         BUILD_SYSTEM: VisualStudioSolution
         PRJ_CFG: "DLL Debug - DLL Windows SSPI - DLL WinIDN"
-        TESTING: OFF
         VC_VERSION: VC14.10
+        TESTING: OFF
       # autotools-based builds (NOT mingw cross-compiling, but msys2 native)
       - job_name: "autotools, msys2, Debug, no Proxy, no SSL"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2017"
         BUILD_SYSTEM: autotools
         TESTING: ON
         DISABLED_TESTS: "!19 ~1056 !1233"
+        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\msys64\\usr\\bin"
         CONFIG_ARGS: "--enable-debug --enable-werror --disable-threaded-resolver --disable-proxy --without-ssl --enable-websockets"
       - job_name: "autotools, msys2, Debug, no SSL"
@@ -280,6 +285,7 @@ environment:
         BUILD_SYSTEM: autotools
         TESTING: ON
         DISABLED_TESTS: "!19 !504 !704 !705 ~1056 !1233"
+        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\msys64\\usr\\bin"
         CONFIG_ARGS: "--enable-debug --enable-werror --disable-threaded-resolver --without-ssl --enable-websockets"
       - job_name: "autotools, msys2, Release, no SSL"
@@ -287,6 +293,7 @@ environment:
         BUILD_SYSTEM: autotools
         TESTING: ON
         DISABLED_TESTS: "!19 !504 !704 !705 ~1056 !1233"
+        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\msys64\\usr\\bin"
         CONFIG_ARGS: "--enable-warnings --enable-werror --without-ssl --enable-websockets"
       # autotools-based Cygwin build
@@ -295,6 +302,7 @@ environment:
         BUILD_SYSTEM: autotools
         TESTING: ON
         DISABLED_TESTS: "~1056"
+        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\cygwin64\\bin"
         CONFIG_ARGS: "--enable-debug --enable-werror --disable-threaded-resolver --without-ssl --enable-websockets"
         POSIX_PATH_PREFIX: "/cygdrive"
@@ -359,13 +367,13 @@ test_script:
         set ACURL=-ac %POSIX_PATH_PREFIX%/c/Windows/System32/curl.exe )
     - if %TESTING%==ON (
         if %BUILD_SYSTEM%==CMake (
-          set TFLAGS=%ACURL% %DISABLED_TESTS% &&
+          set TFLAGS=%ACURL% %DISABLED_TESTS% %PARALLEL_TESTS% &&
           cmake --build . --config %PRJ_CFG% --target test-ci
         ) else (
         if %BUILD_SYSTEM%==autotools (
-          bash.exe -e -l -c "cd %POSIX_PATH_PREFIX%/c/projects/curl && make V=1 TFLAGS='%ACURL% %DISABLED_TESTS%' test-ci"
+          bash.exe -e -l -c "cd %POSIX_PATH_PREFIX%/c/projects/curl && make V=1 TFLAGS='%ACURL% %DISABLED_TESTS% %PARALLEL_TESTS%' test-ci"
         ) else (
-          bash.exe -e -l -c "cd %POSIX_PATH_PREFIX%/c/projects/curl/tests && ./runtests.pl -a -p !flaky -r -rm %ACURL% %DISABLED_TESTS%"
+          bash.exe -e -l -c "cd %POSIX_PATH_PREFIX%/c/projects/curl/tests && ./runtests.pl -a -p !flaky -r -rm %ACURL% %DISABLED_TESTS% %PARALLEL_TESTS%"
         ))
       )
 
