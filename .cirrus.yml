@@ -147,6 +147,7 @@ windows_task:
     CIRRUS_CLONE_DEPTH: 10
     MSYS2_PATH_TYPE: inherit
     MAKEFLAGS: -j 3
+    PARALLEL_TESTS: -j2
 
   prepare_script: |
     %container_cmd% -l -c "cd $(echo '%cd%') && %prepare%"
@@ -157,7 +158,7 @@ windows_task:
   install_script: |
     %container_cmd% -l -c "cd $(echo '%cd%') && %make_cmd% install && PATH=/usr/bin:/bin find . -type f -path '*/.libs/*.exe' -print -execdir mv -t .. {} \;"
   test_script: |
-    %container_cmd% -l -c "cd $(echo '%cd%') && %make_cmd% TFLAGS='!IDN !SCP ~612 ~1056 %tests%' test-ci"
+    %container_cmd% -l -c "cd $(echo '%cd%') && %make_cmd% TFLAGS='%PARALLEL_TESTS% !IDN !SCP ~612 ~1056 %tests%' test-ci"
 
 macos_task:
   skip: "changesIncludeOnly(

@@ -84,6 +84,7 @@ environment:
         SHARED: OFF
         TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
+        PARALLEL_TESTS: "-j2"
         ADD_PATH: "C:\\msys64\\usr\\bin"
       - job_name: "CMake, VS2022, Debug x64, Schannel, Static, Unicode"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2022"
@@ -98,6 +99,7 @@ environment:
         SHARED: OFF
         TESTING: ON
         DISABLED_TESTS: "~571 !1139 !1501 ~1056"
+        PARALLEL_TESTS: "-j2"
         ADD_PATH: "C:\\msys64\\usr\\bin"
       - job_name: "CMake, VS2022, Debug x64, no SSL, Static"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2022"
@@ -112,6 +114,7 @@ environment:
         SHARED: OFF
         TESTING: ON
         DISABLED_TESTS: "~571 !1139 !1501 ~1056"
+        PARALLEL_TESTS: "-j2"
         ADD_PATH: "C:\\msys64\\usr\\bin"
       - job_name: "CMake, VS2022, Debug x64, no SSL, Static, HTTP only"
         APPVEYOR_BUILD_WORKER_IMAGE: "Visual Studio 2022"
@@ -126,6 +129,7 @@ environment:
         SHARED: OFF
         TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
+        PARALLEL_TESTS: "-j2"
         ADD_PATH: "C:\\msys64\\usr\\bin"
       # generated CMake-based MSYS Makefiles builds (mingw cross-compiling)
       - job_name: "CMake, mingw-w64, gcc 8, Debug x64, Schannel, Static, Unicode"
@@ -140,7 +144,6 @@ environment:
         SHARED: OFF
         TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
-        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -156,7 +159,6 @@ environment:
         SHARED: OFF
         TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
-        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\mingw-w64\\x86_64-7.2.0-posix-seh-rt_v5-rev1\\mingw64\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -187,7 +189,6 @@ environment:
         SHARED: OFF
         TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
-        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\mingw-w64\\i686-6.3.0-posix-dwarf-rt_v5-rev1\\mingw32\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -203,7 +204,6 @@ environment:
         SHARED: OFF
         TESTING: ON
         DISABLED_TESTS: "!1139 !1501 ~1056"
-        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\MinGW\\bin;C:\\msys64\\usr\\bin"
         MSYS2_ARG_CONV_EXCL: "/*"
         BUILD_OPT: -k
@@ -277,7 +277,6 @@ environment:
         BUILD_SYSTEM: autotools
         TESTING: ON
         DISABLED_TESTS: "!19 ~1056 !1233"
-        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\msys64\\usr\\bin"
         CONFIG_ARGS: "--enable-debug --enable-werror --disable-threaded-resolver --disable-proxy --without-ssl --enable-websockets"
       - job_name: "autotools, msys2, Debug, no SSL"
@@ -285,7 +284,6 @@ environment:
         BUILD_SYSTEM: autotools
         TESTING: ON
         DISABLED_TESTS: "!19 !504 !704 !705 ~1056 !1233"
-        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\msys64\\usr\\bin"
         CONFIG_ARGS: "--enable-debug --enable-werror --disable-threaded-resolver --without-ssl --enable-websockets"
       - job_name: "autotools, msys2, Release, no SSL"
@@ -293,7 +291,6 @@ environment:
         BUILD_SYSTEM: autotools
         TESTING: ON
         DISABLED_TESTS: "!19 !504 !704 !705 ~1056 !1233"
-        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\msys64\\usr\\bin"
         CONFIG_ARGS: "--enable-warnings --enable-werror --without-ssl --enable-websockets"
       # autotools-based Cygwin build
@@ -302,7 +299,6 @@ environment:
         BUILD_SYSTEM: autotools
         TESTING: ON
         DISABLED_TESTS: "~1056"
-        PARALLEL_TESTS: "-j0"
         ADD_PATH: "C:\\cygwin64\\bin"
         CONFIG_ARGS: "--enable-debug --enable-werror --disable-threaded-resolver --without-ssl --enable-websockets"
         POSIX_PATH_PREFIX: "/cygdrive"
