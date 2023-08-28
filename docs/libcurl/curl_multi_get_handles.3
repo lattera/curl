@@ -61,6 +61,7 @@ The returned array must be freed with a call to \fIcurl_free(3)\fP after use.
     for(i = 0; list[i]; i++) {
       curl_multi_remove_handle(multi_handle, list[i]);
     }
+    curl_free(list);
   }
 .fi
 .SH AVAILABILITY
