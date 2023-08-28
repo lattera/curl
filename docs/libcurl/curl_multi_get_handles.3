@@ -34,7 +34,17 @@ CURL **curl_multi_get_handles(CURLM *multi_handle);
 Returns an array with pointers to all added easy handles. The end of the list
 is marked with a NULL pointer.
 
-The pointer must be freed with a call to \fIcurl_free(3)\fP after use.
+Even if there is not a single easy handle added, this still returns an array
+but with only a single NULL pointer entry.
+
+The returned array contains all the handles that are present at the time of
+the call. As soon as a handle has been removed from or a handle has been added
+to the multi handle after the handle array were returned, the two data points
+are out of sync.
+
+The order of the easy handles within the array is not guaranteed.
+
+The returned array must be freed with a call to \fIcurl_free(3)\fP after use.
 .SH EXAMPLE
 .nf
   /* init a multi stack */
