@@ -434,7 +434,7 @@ CURL_EXTERN CURLMcode curl_multi_assign(CURLM *multi_handle,
  *          If there is no handles added, it returns an array with the first entry
  *          a NULL pointer.
  *
- * Returns: NULL on failure, otherwise a CURL **array pointere
+ * Returns: NULL on failure, otherwise a CURL **array pointer
  */
 CURL_EXTERN CURL **curl_multi_get_handles(CURLM *multi_handle);
 
