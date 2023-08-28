@@ -429,10 +429,10 @@ CURL_EXTERN CURLMcode curl_multi_assign(CURLM *multi_handle,
 /*
  * Name:    curl_multi_get_handles()
  *
- * Desc:    This function returns an allocated array holding all handles currently
- *          added to the multi handle. It marks the end with a NULL pointer.
- *          If there is no handles added, it returns an array with the first entry
- *          a NULL pointer.
+ * Desc:    Returns an allocated array holding all handles currently added to
+ *          the multi handle. Marks the final entry with a NULL pointer. If
+ *          there is no easy handle added to the multi handle, this function
+ *          returns an array with the first entry as a NULL pointer.
  *
  * Returns: NULL on failure, otherwise a CURL **array pointer
  */
