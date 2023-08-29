@@ -426,6 +426,12 @@ CURL_EXTERN CURLMcode curl_multi_setopt(CURLM *multi_handle,
 CURL_EXTERN CURLMcode curl_multi_assign(CURLM *multi_handle,
                                         curl_socket_t sockfd, void *sockp);
 
+typedef enum {
+  CURLHND_USER,       /* easy handle owned by the user */
+  CURLHND_INTERNAL,   /* easy handle owned internally */
+  CURLHND_ALL         /* both */
+} CURLHND;
+
 /*
  * Name:    curl_multi_get_handles()
  *
@@ -436,7 +442,7 @@ CURL_EXTERN CURLMcode curl_multi_assign(CURLM *multi_handle,
  *
  * Returns: NULL on failure, otherwise a CURL **array pointer
  */
-CURL_EXTERN CURL **curl_multi_get_handles(CURLM *multi_handle);
+CURL_EXTERN CURL **curl_multi_get_handles(CURLM *multi_handle, CURLHND filter);
 
 /*
  * Name: curl_push_callback
