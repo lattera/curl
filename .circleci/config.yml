@@ -75,14 +75,14 @@ commands:
       - run:
           command: |
             autoreconf -fi
-            ./configure --enable-warnings --enable-websockets --with-openssl=/opt/homebrew/opt/openssl --with-libssh --enable-ares --enable-debug CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
+            ./configure --enable-warnings --enable-websockets --with-openssl --with-libssh --enable-ares --enable-debug PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
 
   configure-macos-libssh:
     steps:
       - run:
           command: |
             autoreconf -fi
-            ./configure --enable-warnings --enable-websockets --with-openssl=/opt/homebrew/opt/openssl --with-libssh --enable-debug CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
+            ./configure --enable-warnings --enable-websockets --with-openssl --with-libssh --enable-debug PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
 
   configure-macos-c-ares:
     steps:
@@ -110,28 +110,28 @@ commands:
       - run:
           command: |
             autoreconf -fi
-            ./configure --enable-warnings --enable-websockets --with-openssl=/opt/homebrew/opt/openssl --enable-debug CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
+            ./configure --enable-warnings --enable-websockets --with-openssl --enable-debug PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
 
   configure-macos-libressl-http2:
     steps:
       - run:
           command: |
             autoreconf -fi
-            ./configure --enable-warnings --enable-websockets --with-openssl=/opt/homebrew/opt/libressl --enable-debug CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
+            ./configure --enable-warnings --enable-websockets --with-openssl --enable-debug PKG_CONFIG_PATH="$(brew --prefix libressl)/lib/pkgconfig" CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
 
   configure-macos-torture:
     steps:
       - run:
           command: |
             autoreconf -fi
-            ./configure --enable-warnings --enable-websockets --disable-shared --disable-threaded-resolver --with-openssl=/opt/homebrew/opt/openssl --enable-debug CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
+            ./configure --enable-warnings --enable-websockets --disable-shared --disable-threaded-resolver --with-openssl --enable-debug PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
 
   configure-macos-torture-ftp:
     steps:
       - run:
           command: |
             autoreconf -fi
-            ./configure --enable-warnings --enable-websockets --disable-shared --disable-threaded-resolver --with-openssl=/opt/homebrew/opt/openssl --enable-debug CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
+            ./configure --enable-warnings --enable-websockets --disable-shared --disable-threaded-resolver --with-openssl --enable-debug PKG_CONFIG_PATH="$(brew --prefix openssl)/lib/pkgconfig" CFLAGS='-Wno-vla -mmacosx-version-min=10.9'
 
   install-cares:
     steps:
