@@ -369,48 +369,99 @@ fail:
   return ret;
 }
 
+struct pair {
+  const char *p;
+  size_t len;
+};
+
+#define MAX_QUERYPAIRS 64
+
+static int compare_func(const void *a,
+                        const void *b)
+{
+  const struct pair *aa = a;
+  const struct pair *bb = b;
+  return strncmp(aa->p, bb->p, aa->len < bb->len ? aa->len : bb->len);
+}
+
 static CURLcode canon_query(const char *query, struct dynbuf *dq)
 {
   CURLcode result = CURLE_OK;
+  int entry = 0;
+  int i;
+  const char *p = query;
+  struct pair array[MAX_QUERYPAIRS];
+  struct pair *ap = &array[0];
   if(!query)
     return result;
-  for(;*query && !result; query++) {
-    if(ISALNUM(*query))
-      result = Curl_dyn_addn(dq, query, 1);
+
+  /* sort the name=value pairs first */
+  do {
+    char *amp;
+    entry++;
+    ap->p = p;
+    amp = strchr(p, '&');
+    if(amp)
+      ap->len = amp - p; /* excluding the ampersand */
     else {
-      switch(*query) {
-      case '-':
-      case '.':
-      case '_':
-      case '~':
-      case '=':
-      case '&':
-        /* allowed as-is */
-        result = Curl_dyn_addn(dq, query, 1);
-        break;
-      case '%':
-        /* uppercase the following if hexadecimal */
-        if(ISXDIGIT(query[1]) && ISXDIGIT(query[2])) {
-          char tmp[3]="%";
-          tmp[1] = Curl_raw_toupper(query[1]);
-          tmp[2] = Curl_raw_toupper(query[2]);
-          result = Curl_dyn_addn(dq, tmp, 3);
-          query += 2;
+      ap->len = strlen(p);
+      break;
+    }
+    ap++;
+    p = amp + 1;
+  } while(entry < MAX_QUERYPAIRS);
+  if(entry == MAX_QUERYPAIRS)
+    /* too many query pairs for us */
+    return CURLE_URL_MALFORMAT;
+
+  qsort(&array[0], entry, sizeof(struct pair), compare_func);
+
+  ap = &array[0];
+  for(i = 0; !result && (i < entry); i++, ap++) {
+    size_t len;
+    const char *q = ap->p;
+    for(len = ap->len; len && !result; q++, len--) {
+      if(ISALNUM(*q))
+        result = Curl_dyn_addn(dq, q, 1);
+      else {
+        switch(*q) {
+        case '-':
+        case '.':
+        case '_':
+        case '~':
+        case '=':
+        case '&':
+          /* allowed as-is */
+          result = Curl_dyn_addn(dq, q, 1);
+          break;
+        case '%':
+          /* uppercase the following if hexadecimal */
+          if(ISXDIGIT(q[1]) && ISXDIGIT(q[2])) {
+            char tmp[3]="%";
+            tmp[1] = Curl_raw_toupper(q[1]);
+            tmp[2] = Curl_raw_toupper(q[2]);
+            result = Curl_dyn_addn(dq, tmp, 3);
+            q += 2;
+          }
+          else
+            /* '%' without a following two-digit hex, encode it */
+            result = Curl_dyn_addn(dq, "%25", 3);
+          break;
+        default: {
+          /* URL encode */
+          const char hex[] = "0123456789ABCDEF";
+          char out[3]={'%'};
+          out[1] = hex[*q>>4];
+          out[2] = hex[*q & 0xf];
+          result = Curl_dyn_addn(dq, out, 3);
+          break;
         }
-        else
-          /* '%' without a following two-digit hex, encode it */
-          result = Curl_dyn_addn(dq, "%25", 3);
-        break;
-      default: {
-        /* URL encode */
-        const char hex[] = "0123456789ABCDEF";
-        char out[3]={'%'};
-        out[1] = hex[*query>>4];
-        out[2] = hex[*query & 0xf];
-        result = Curl_dyn_addn(dq, out, 3);
-        break;
+        }
       }
-      }
+    }
+    if(i < entry - 1) {
+      /* insert ampersands between query pairs */
+      result = Curl_dyn_addn(dq, "&", 1);
     }
   }
   return result;
