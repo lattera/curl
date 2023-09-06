@@ -430,7 +430,6 @@ static CURLcode canon_query(const char *query, struct dynbuf *dq)
         case '_':
         case '~':
         case '=':
-        case '&':
           /* allowed as-is */
           result = Curl_dyn_addn(dq, q, 1);
           break;
