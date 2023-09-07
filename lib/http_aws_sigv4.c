@@ -450,7 +450,7 @@ static CURLcode canon_query(const char *query, struct dynbuf *dq)
           /* URL encode */
           const char hex[] = "0123456789ABCDEF";
           char out[3]={'%'};
-          out[1] = hex[*q>>4];
+          out[1] = hex[((unsigned char)*q)>>4];
           out[2] = hex[*q & 0xf];
           result = Curl_dyn_addn(dq, out, 3);
           break;
