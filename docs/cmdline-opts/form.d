@@ -30,7 +30,7 @@ Tell curl to read content from stdin instead of a file by using - as
 filename. This goes for both @ and < constructs. When stdin is used, the
 contents is buffered in memory first by curl to determine its size and allow a
 possible resend. Defining a part's data from a named non-regular file (such as
-a named pipe or similar) is not subject to buffering and is isntead read at
+a named pipe or similar) is not subject to buffering and is instead read at
 transmission time; since the full size is unknown before the transfer starts,
 such data is sent as chunks by HTTP and rejected by IMAP.
 
