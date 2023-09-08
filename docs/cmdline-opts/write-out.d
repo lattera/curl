@@ -28,7 +28,7 @@ standard error by using %{stderr}.
 Output HTTP headers from the most recent request by using *%header{name}*
 where *name* is the case insensitive name of the header (without the trailing
 colon). The header contents are exactly as sent over the network, with leading
-and trailing whitespace trimmed. Added in curl 7.84.0.
+and trailing whitespace trimmed (added in 7.84.0).
 
 Select a specific target destination file to write the output to, by using
 *%output{name}* where *name* is the full file name. The output following that
@@ -105,8 +105,8 @@ The http method used in the most recent HTTP request. (Added in 7.72.0)
 .TP
 **num_certs**
 Number of server certificates received in the TLS handshake. Supported only by
-the OpenSSL, GnuTLS, Schannel and Secure Transport backends. (Added
-in 7.88.0)
+the OpenSSL, GnuTLS, Schannel and Secure Transport backends.
+(Added in 7.88.0)
 .TP
 **num_connects**
 Number of new connects made in the recent transfer. (Added in 7.12.3)
